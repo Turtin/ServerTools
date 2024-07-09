@@ -1,0 +1,7 @@
+# Welcome to the Server Tools configuration file
+
+# This plugin is still a work in progress so if some of these features don't work, please let me know.
+
+# Discord settings
+
+bot-token: 'YOUR-BOT-TOKEN' # Don't leak!!!!

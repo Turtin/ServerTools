@@ -67,5 +67,18 @@
             <version>1.21-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>net.dv8tion</groupId>
+            <artifactId>JDA</artifactId>
+            <version>5.0.0</version> <!-- replace $version with the latest version -->
+            <!-- Optionally disable audio natives to reduce jar size by excluding `opus-java`
+            <exclusions>
+                <exclusion>
+                    <groupId>club.minnced</groupId>
+                    <artifactId>opus-java</artifactId>
+                </exclusion>
+            </exclusions>
+            -->
+        </dependency>
     </dependencies>
 </project>
