@@ -1,0 +1,4 @@
+name: Server Tools
+version: '${project.version}'
+main: net.duckycraft.server_tools.ServerTools
+api-version: '1.21'
