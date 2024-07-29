@@ -2,3 +2,9 @@ name: ServerTools
 version: '${project.version}'
 main: net.duckycraft.server_tools.ServerTools
 api-version: '1.21'
+commands:
+    vanish:
+        description: Vanish command
+        usage: /<command>
+        aliases: [v, vanishplayer, vp]
+        permission: servertools.vanish
