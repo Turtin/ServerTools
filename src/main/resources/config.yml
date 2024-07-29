@@ -5,4 +5,8 @@
 # Discord settings
 
 bot-token: '' # Don't leak!!!!
+
+# Chat forwarding settings
+
+chat-forwarding: true
 channel-id: ''
