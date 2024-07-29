@@ -24,9 +24,16 @@ public final class ServerTools extends JavaPlugin {
             throw new RuntimeException(e);
         }
 
+        // Vanish setup
+        try {
+            new VanishCommand(this).setActionBar();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         // Event Registry
         getServer().getPluginManager().registerEvents(new ChatEvent(bot, getConfig()), this);
-        getServer().getPluginManager().registerEvents(new JoinEvent(this));
+        getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
 
         // Command Registry
         getCommand("vanish").setExecutor(new VanishCommand(this));

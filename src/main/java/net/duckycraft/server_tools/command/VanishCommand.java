@@ -1,5 +1,7 @@
 package net.duckycraft.server_tools.command;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,15 +17,29 @@ public class VanishCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
-    protected void activateVanish(Player player) {
+    public void setActionBar () throws InterruptedException {
+        while (true) {
+            for (Player p : plugin.getServer().getOnlinePlayers()) {
+                if (p.hasMetadata("vanished")) {
+                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("You are currently invisible!"));
+                }
+            }
+            wait(500);
+        }
+    }
+
+    private void activateVanish(Player player) {
         if (player.hasMetadata("vanished")) { // If they are vanished
             player.removeMetadata("vanished", plugin);
+            plugin.getServer().broadcastMessage(player.getName() + " has joined the game!");
         } else { // If they are not vanished
             player.setMetadata("vanished", new FixedMetadataValue(plugin, true));
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("You are currently invisible!"));
+            plugin.getServer().broadcastMessage(player.getName() + " has left the game!");
         }
 
         for (Player p : player.getServer().getOnlinePlayers()) {
-            if (player.hasMetadata("vanished") && !p.isOp() && !p.hasMetadata("vanished")) {
+            if (player.hasMetadata("vanished") && (!p.isOp() || !p.hasMetadata("vanished"))) {
                 p.hidePlayer(plugin, player);
             } else {
                 p.showPlayer(plugin, player);
