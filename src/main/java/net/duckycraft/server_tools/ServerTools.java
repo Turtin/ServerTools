@@ -1,8 +1,10 @@
 package net.duckycraft.server_tools;
 
 import net.duckycraft.server_tools.bot.BotHandeler;
+import net.duckycraft.server_tools.command.ActionBarHandeler;
 import net.duckycraft.server_tools.command.VanishCommand;
 import net.duckycraft.server_tools.event.ChatEvent;
+import net.duckycraft.server_tools.event.CommandEvent;
 import net.duckycraft.server_tools.event.JoinEvent;
 import net.duckycraft.server_tools.file.FirstInit;
 import org.bukkit.ChatColor;
@@ -24,19 +26,18 @@ public final class ServerTools extends JavaPlugin {
             throw new RuntimeException(e);
         }
 
-        // Vanish setup
-        try {
-            new VanishCommand(this).setActionBar();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        // Try to start up the vanish action bar
+        ActionBarHandeler actionBar = new ActionBarHandeler(this);
+        actionBar.start();
 
         // Event Registry
         getServer().getPluginManager().registerEvents(new ChatEvent(bot, getConfig()), this);
         getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
+        getServer().getPluginManager().registerEvents(new CommandEvent(), this);
 
         // Command Registry
         getCommand("vanish").setExecutor(new VanishCommand(this));
+        getCommand("vanish").setTabCompleter(new VanishCommand(this));
 
         BOT = bot; // saving the bot instance to a field so it can be accessed later
         // Notifying the console that the plugin has been enabled

@@ -25,5 +25,9 @@ public class JoinEvent implements Listener {
                 player.showPlayer(plugin, p);
             }
         }
+
+        if (player.hasMetadata("vanished")) {
+            event.setJoinMessage(null); // Prevents join message from happening
+        }
     }
 }
