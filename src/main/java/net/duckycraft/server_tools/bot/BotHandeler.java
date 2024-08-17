@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Icon;
 import net.dv8tion.jda.api.entities.Webhook;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.managers.WebhookManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -25,6 +26,11 @@ public class BotHandeler {
         TOKEN = config.getString("bot-token"); // Getting the bot token from the config file
         JDABuilder builder = JDABuilder.createDefault(TOKEN); // Creating the bot
         bot = builder/*.enableIntents(EnumSet.allOf(GatewayIntent.class))*/.build().awaitReady();
+
+        // Event setup
+        bot.addEventListener(new BotCommands()); // Commands
+        // Registering the commands
+        bot.getGuildById(config.getString("guild-id")).updateCommands().addCommands(Commands.slash("join", "Join the minecraft chat"));
     }
 
     private Webhook getWebhookByName(String name) { // Subject to removal

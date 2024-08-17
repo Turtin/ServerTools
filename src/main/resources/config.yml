@@ -9,4 +9,5 @@ bot-token: '' # Don't leak!!!!
 # Chat forwarding settings
 
 chat-forwarding: true
+server-id: ''
 channel-id: ''
