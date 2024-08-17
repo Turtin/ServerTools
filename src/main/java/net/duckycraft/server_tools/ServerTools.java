@@ -2,6 +2,7 @@ package net.duckycraft.server_tools;
 
 import net.duckycraft.server_tools.bot.BotHandeler;
 import net.duckycraft.server_tools.command.ActionBarHandeler;
+import net.duckycraft.server_tools.command.MessageVanisher;
 import net.duckycraft.server_tools.command.VanishCommand;
 import net.duckycraft.server_tools.event.ChatEvent;
 import net.duckycraft.server_tools.event.CommandEvent;
@@ -21,7 +22,7 @@ public final class ServerTools extends JavaPlugin {
         saveDefaultConfig(); // Creating the config file if it doesn't exist
         BotHandeler bot = new BotHandeler(); // Preparing the bot
         try { // Trying to create the bot
-            bot.createBot(getConfig());
+            bot.createBot(getConfig(), this);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -39,6 +40,11 @@ public final class ServerTools extends JavaPlugin {
         getCommand("vanish").setExecutor(new VanishCommand(this));
         getCommand("vanish").setTabCompleter(new VanishCommand(this));
 
+        // hiding vanished players from /w
+        getCommand("msg").setExecutor(new MessageVanisher());
+        getCommand("w").setExecutor(new MessageVanisher());
+        getCommand("tell").setExecutor(new MessageVanisher());
+
         BOT = bot; // saving the bot instance to a field so it can be accessed later
         // Notifying the console that the plugin has been enabled
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "ServerTools has been enabled!");
@@ -48,6 +54,6 @@ public final class ServerTools extends JavaPlugin {
     public void onDisable() {
         BOT.clearWebhooks(); // Clearing all webhooks when the server stops
         // Notifying the console that the plugin has been disabled
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "ServerTools has been enabled!");
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "ServerTools has been disabled!");
     }
 }

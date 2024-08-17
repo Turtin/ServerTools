@@ -8,3 +8,12 @@ commands:
         usage: /<command>
         aliases: [v, vanishplayer, vp]
         permission: servertools.vanish
+    msg:
+        description: A Mojang provided command
+        usage: /<command>
+    w:
+        description: A Mojang provided command
+        usage: /<command>
+    tell:
+        description: A Mojang provided command
+        usage: /<command>

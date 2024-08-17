@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.managers.WebhookManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,16 +22,13 @@ public class BotHandeler {
 
     HashMap<Player, Webhook> webhooks = new HashMap<>();
 
-    public void createBot(FileConfiguration configFile) throws InterruptedException {
+    public void createBot(FileConfiguration configFile, Plugin plugin) throws InterruptedException {
         config = configFile; // Saving the config file to a field so it can be accessed later
         TOKEN = config.getString("bot-token"); // Getting the bot token from the config file
         JDABuilder builder = JDABuilder.createDefault(TOKEN); // Creating the bot
         bot = builder/*.enableIntents(EnumSet.allOf(GatewayIntent.class))*/.build().awaitReady();
 
-        // Event setup
-        bot.addEventListener(new BotCommands()); // Commands
-        // Registering the commands
-        bot.getGuildById(config.getString("guild-id")).updateCommands().addCommands(Commands.slash("join", "Join the minecraft chat"));
+//        bot.addEventListener(new BotCommands(bot, config, plugin)); // Registering the bot commands
     }
 
     private Webhook getWebhookByName(String name) { // Subject to removal
