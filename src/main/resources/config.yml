@@ -11,3 +11,7 @@ bot-token: '' # Don't leak!!!!
 chat-forwarding: true
 server-id: ''
 channel-id: ''
+
+# Other Settings
+
+enable-server-whisper: true # allows players to whisper to the server

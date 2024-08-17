@@ -41,9 +41,13 @@ public final class ServerTools extends JavaPlugin {
         getCommand("vanish").setTabCompleter(new VanishCommand(this));
 
         // hiding vanished players from /w
-        getCommand("msg").setExecutor(new MessageVanisher());
-        getCommand("w").setExecutor(new MessageVanisher());
-        getCommand("tell").setExecutor(new MessageVanisher());
+        boolean servercom = getConfig().getBoolean("enable-server-whisper");
+        getCommand("msg").setExecutor(new MessageVanisher(servercom));
+        getCommand("w").setExecutor(new MessageVanisher(servercom));
+        getCommand("tell").setExecutor(new MessageVanisher(servercom));
+        getCommand("msg").setTabCompleter(new MessageVanisher(servercom));
+        getCommand("w").setTabCompleter(new MessageVanisher(servercom));
+        getCommand("tell").setTabCompleter(new MessageVanisher(servercom));
 
         BOT = bot; // saving the bot instance to a field so it can be accessed later
         // Notifying the console that the plugin has been enabled
