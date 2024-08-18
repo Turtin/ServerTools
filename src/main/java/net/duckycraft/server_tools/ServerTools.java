@@ -8,6 +8,7 @@ import net.duckycraft.server_tools.event.ChatEvent;
 import net.duckycraft.server_tools.event.CommandEvent;
 import net.duckycraft.server_tools.event.JoinEvent;
 import net.duckycraft.server_tools.file.FirstInit;
+import net.duckycraft.server_tools.tasks.RestartSchedule;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,6 +31,9 @@ public final class ServerTools extends JavaPlugin {
         // Try to start up the vanish action bar
         ActionBarHandeler actionBar = new ActionBarHandeler(this);
         actionBar.start();
+
+        RestartSchedule restart = new RestartSchedule();
+        restart.start();
 
         // Event Registry
         getServer().getPluginManager().registerEvents(new ChatEvent(bot, getConfig()), this);
