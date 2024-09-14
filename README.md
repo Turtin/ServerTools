@@ -9,7 +9,7 @@ Just random stuff that might help, or just be cool for minecraft
 - Configuration
 - Scheduled restarts which countdowns and force restart
 - Backup system
-- Minecraft gui creator (Probably will happen, and may include a web tool for this as well)
+- ~~Minecraft gui creator (Probably will happen, and may include a web tool for this as well)~~ This feature has been moved to its own project
 
 Note that this plugin requires a discord bot, and one is not provided, to use it, create your own bot in the discord developer portal and ensure that is has permission to create webhooks and send messages, for simplicity just give it admin. If you don't do this, the plugin may run slower or spam a bunch of error after every message. Or just turn off the discord intergration.
 
