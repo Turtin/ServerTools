@@ -24,6 +24,12 @@ public class ChatEvent implements Listener {
         }
 
         String message = event.getMessage(); // Getting the message
-        BOT.sendMessage(message, event.getPlayer()); // Sending the message to discord
+        new Thread(() -> {
+            try {
+                BOT.sendMessage(message, event.getPlayer());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }).start(); // Sending the message to discord
     }
 }
